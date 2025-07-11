@@ -60,6 +60,7 @@ export interface Producto {
   descripcion: string;
   categoria: string[];
   imagen?: string;
+  tienda_id?: number;
   createdAt: string;
   updatedAt: string;
 }

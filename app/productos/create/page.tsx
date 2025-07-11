@@ -90,7 +90,7 @@ const CreateProductoContent = () => {
       const response = await productosAPI.create(productoData);
       
       toast.success('Producto creado exitosamente');
-      router.push(`/productos/${response.data.id}`);
+      router.push(`/productos/${response.data._id}`);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error al crear el producto';
       setError(errorMessage);
@@ -166,7 +166,7 @@ const CreateProductoContent = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {userTiendas.map((tienda) => (
-                    <SelectItem key={tienda._id} value={String(tienda._id)}>
+                    <SelectItem key={tienda._id} value={tienda._id.toString()}>
                       {tienda.nombre}
                     </SelectItem>
                   ))}

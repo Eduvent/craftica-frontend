@@ -92,7 +92,7 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
         precio: producto.precio,
         categoria: producto.categoria[0] || '',
         imagen: producto.imagen || '',
-        tienda_id: producto.tienda_id,
+        tienda_id: producto.tienda_id?.toString() || '',
       });
     }
   }, [producto, reset]);
@@ -110,11 +110,11 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
         imagen: data.imagen || undefined,
       };
 
-      await productosAPI.update(producto.id, updatedData);
+      await productosAPI.update(producto._id.toString(), updatedData);
       
       toast.success('Producto actualizado exitosamente');
       mutate(); // Revalidar datos
-      router.push(`/productos/${producto.id}`);
+      router.push(`/productos/${producto._id}`);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error al actualizar el producto';
       setError(errorMessage);
@@ -156,7 +156,7 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center mb-4">
-          <Link href={`/productos/${producto.id}`}>
+          <Link href={`/productos/${producto._id}`}>
             <Button variant="outline" size="sm" className="mr-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Volver
@@ -198,7 +198,7 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
                 </SelectTrigger>
                 <SelectContent>
                   {userTiendas.map((tienda) => (
-                    <SelectItem key={tienda.id} value={tienda.id}>
+                    <SelectItem key={tienda._id} value={tienda._id.toString()}>
                       {tienda.nombre}
                     </SelectItem>
                   ))}
@@ -282,7 +282,7 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
             </div>
 
             <div className="flex justify-end space-x-4 pt-6">
-              <Link href={`/productos/${producto.id}`}>
+              <Link href={`/productos/${producto._id}`}>
                 <Button type="button" variant="outline">
                   Cancelar
                 </Button>

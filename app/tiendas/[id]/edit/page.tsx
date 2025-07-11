@@ -110,11 +110,11 @@ const EditTiendaContent = ({ tiendaId }: { tiendaId: string }) => {
         logo: data.logo || undefined,
       };
 
-      await tiendasAPI.update(tienda.id, updatedData);
+      await tiendasAPI.update(tienda._id.toString(), updatedData);
       
       toast.success('Tienda actualizada exitosamente');
       mutate(); // Revalidar datos
-      router.push(`/tiendas/${tienda.id}`);
+      router.push(`/tiendas/${tienda._id}`);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error al actualizar la tienda';
       setError(errorMessage);
@@ -153,7 +153,7 @@ const EditTiendaContent = ({ tiendaId }: { tiendaId: string }) => {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center mb-4">
-          <Link href={`/tiendas/${tienda.id}`}>
+          <Link href={`/tiendas/${tienda._id}`}>
             <Button variant="outline" size="sm" className="mr-4">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Volver
@@ -291,7 +291,7 @@ const EditTiendaContent = ({ tiendaId }: { tiendaId: string }) => {
             </div>
 
             <div className="flex justify-end space-x-4 pt-6">
-              <Link href={`/tiendas/${tienda.id}`}>
+              <Link href={`/tiendas/${tienda._id}`}>
                 <Button type="button" variant="outline">
                   Cancelar
                 </Button>
