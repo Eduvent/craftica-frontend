@@ -11,7 +11,7 @@ import {
   PaginatedResponse
 } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://craftica-backend.hvf6fqedd3e3ezee.canadacentral.azurecontainer.io:3000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://craftica-backend.hvf6fqedd3e3ezee.canadacentral.azurecontainer.io:3000';
 
 // Configuración base para fetch
 const createFetchOptions = (options: RequestInit = {}): RequestInit => {
@@ -41,6 +41,9 @@ const handleNetworkError = (error: any): never => {
   console.error('Network error:', error);
   if (error.name === 'TypeError' && error.message.includes('fetch')) {
     throw new Error('Error de conexión con el servidor. Verifica tu conexión a internet.');
+  }
+  if (error.message && error.message.includes('SSL')) {
+    throw new Error('Error de conexión SSL. El servidor no está disponible con HTTPS.');
   }
   throw error;
 };
