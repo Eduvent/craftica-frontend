@@ -82,7 +82,7 @@ const EditTiendaContent = ({ tiendaId }: { tiendaId: string }) => {
   }, [tienda, reset]);
 
   // Verificar permisos
-  if (!tiendaLoading && tienda && user?.id !== tienda.usuario_id) {
+      if (!tiendaLoading && tienda && user?._id !== tienda.usuario_id) {
     return (
       <div className="text-center py-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">

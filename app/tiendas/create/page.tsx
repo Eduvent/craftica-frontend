@@ -66,7 +66,7 @@ const CreateTiendaContent = () => {
 
       const tiendaData = {
         ...data,
-        usuario_id: user.id,
+        usuario_id: user._id,
         logo: data.logo || undefined,
       };
 

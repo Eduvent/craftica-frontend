@@ -150,7 +150,7 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
   }
 
   // Filtrar tiendas del usuario actual
-  const userTiendas = tiendas.filter(tienda => tienda.usuario_id === user?.id);
+  const userTiendas = tiendas.filter(tienda => tienda.usuario_id === user?._id);
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

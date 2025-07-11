@@ -103,7 +103,7 @@ const CreateProductoContent = () => {
 
   // Filtrar tiendas del usuario actual y eliminar duplicados por _id
   const userTiendas = tiendas
-    .filter(tienda => tienda.usuario_id === user?.id)
+    .filter(tienda => tienda.usuario_id === user?._id)
     .filter((tienda, index, self) =>
       index === self.findIndex(t => t._id === tienda._id)
     );
