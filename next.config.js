@@ -4,7 +4,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
+  images: {
+    unoptimized: true,
+    domains: ['upload.wikimedia.org'],
+  },
   // Configuración para manejar Mixed Content de forma más permisiva
   async headers() {
     return [
