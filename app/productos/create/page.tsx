@@ -58,7 +58,7 @@ export default function CreateProductoPage() {
 const CreateProductoContent = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const { tiendas } = useTiendas({ limit: 100 }); // Cargar todas las tiendas del usuario
+  const { tiendas } = useTiendas({ limit: 100, usuario_id: user?._id }); // Cargar solo las tiendas del usuario
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

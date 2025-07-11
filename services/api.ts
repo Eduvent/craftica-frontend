@@ -52,24 +52,24 @@ const handleNetworkError = (error: any): never => {
 export const authAPI = {
   login: async (credentials: LoginCredentials): Promise<APIResponse<{ token: string; user: Usuario }>> => {
     try {
-      const response = await fetch(`${API_BASE_URL}/usuarios/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(credentials),
-      });
-      
-      const data = await response.json();
-      
-      // Transformar la respuesta del backend al formato esperado por el frontend
-      if (data.status === "Usuario logueado") {
-        return {
-          data: {
-            token: "temp_token", // El backend no devuelve token, usar uno temporal
-            user: data.user
-          }
-        };
-      } else {
-        throw new Error(data.status || 'Error en el login');
+    const response = await fetch(`${API_BASE_URL}/usuarios/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
+    });
+    
+    const data = await response.json();
+    
+    // Transformar la respuesta del backend al formato esperado por el frontend
+    if (data.status === "Usuario logueado") {
+      return {
+        data: {
+          token: "temp_token", // El backend no devuelve token, usar uno temporal
+          user: data.user
+        }
+      };
+    } else {
+      throw new Error(data.status || 'Error en el login');
       }
     } catch (error) {
       return handleNetworkError(error);
@@ -103,12 +103,13 @@ export const authAPI = {
 
 // Tiendas API
 export const tiendasAPI = {
-  getAll: async (params?: { page?: number; limit?: number; ciudad?: string; pais?: string }): Promise<PaginatedResponse<Tienda>> => {
+  getAll: async (params?: { page?: number; limit?: number; ciudad?: string; pais?: string; usuario_id?: number }): Promise<PaginatedResponse<Tienda>> => {
     const searchParams = new URLSearchParams();
     if (params?.page) searchParams.append('page', params.page.toString());
     if (params?.limit) searchParams.append('limit', params.limit.toString());
     if (params?.ciudad) searchParams.append('ciudad', params.ciudad);
     if (params?.pais) searchParams.append('pais', params.pais);
+    if (params?.usuario_id) searchParams.append('usuario_id', params.usuario_id.toString());
     
     const response = await fetch(`${API_BASE_URL}/tiendas?${searchParams}`, createFetchOptions());
     const data = await response.json();
