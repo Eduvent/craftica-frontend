@@ -108,6 +108,7 @@ const EditProductoContent = ({ productoId }: { productoId: string }) => {
         ...data,
         categoria: [data.categoria],
         imagen: data.imagen || undefined,
+        tienda_id: Number(data.tienda_id),
       };
 
       await productosAPI.update(producto._id.toString(), updatedData);

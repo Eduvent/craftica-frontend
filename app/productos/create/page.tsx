@@ -85,6 +85,7 @@ const CreateProductoContent = () => {
       const productoData = {
         ...data,
         imagen: data.imagen || undefined,
+        tienda_id: Number(data.tienda_id),
       };
 
       const response = await productosAPI.create(productoData);
