@@ -19,9 +19,13 @@ const nextConfig = {
       },
     ];
   },
-  // Configuración para archivos estáticos
-  experimental: {
-    optimizeCss: true,
+  // Configuración para evitar errores de prerenderizado
+  trailingSlash: false,
+  generateEtags: false,
+  // Configuración para evitar errores de build
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 };
 
