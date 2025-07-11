@@ -6,7 +6,16 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['upload.wikimedia.org'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
+    ],
   },
   // Configuración para manejar Mixed Content de forma más permisiva
   async headers() {
