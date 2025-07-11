@@ -73,7 +73,7 @@ const CreateTiendaContent = () => {
       const response = await tiendasAPI.create(tiendaData);
       
       toast.success('Tienda creada exitosamente');
-      router.push(`/tiendas/${response.data.id}`);
+      router.push(`/tiendas/${response.data._id}`);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error al crear la tienda';
       setError(errorMessage);
