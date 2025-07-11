@@ -58,7 +58,7 @@ export default function CreateProductoPage() {
 const CreateProductoContent = () => {
   const { user } = useAuth();
   const router = useRouter();
-  const { tiendas } = useTiendas({ limit: 100, usuario_id: user?._id }); // Cargar solo las tiendas del usuario
+  const { tiendas } = useTiendas({ limit: 100 }); // Cargar todas las tiendas
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -104,7 +104,6 @@ const CreateProductoContent = () => {
 
   // Filtrar tiendas del usuario actual y eliminar duplicados por _id
   const userTiendas = tiendas
-    .filter(tienda => tienda.usuario_id === user?._id)
     .filter((tienda, index, self) =>
       index === self.findIndex(t => t._id === tienda._id)
     );
