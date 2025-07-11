@@ -11,7 +11,7 @@ import {
   PaginatedResponse
 } from '@/types';
 
-const API_BASE_URL = 'http://craftica-backend.hvf6fqedd3e3ezee.canadacentral.azurecontainer.io:3000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://craftica-backend.hvf6fqedd3e3ezee.canadacentral.azurecontainer.io:3000';
 
 // Configuración base para fetch
 const createFetchOptions = (options: RequestInit = {}): RequestInit => {
@@ -36,27 +36,40 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
   return response.json();
 };
 
+// Función helper para manejar errores de red
+const handleNetworkError = (error: any): never => {
+  console.error('Network error:', error);
+  if (error.name === 'TypeError' && error.message.includes('fetch')) {
+    throw new Error('Error de conexión con el servidor. Verifica tu conexión a internet.');
+  }
+  throw error;
+};
+
 // Auth API
 export const authAPI = {
   login: async (credentials: LoginCredentials): Promise<APIResponse<{ token: string; user: Usuario }>> => {
-    const response = await fetch(`${API_BASE_URL}/usuarios/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(credentials),
-    });
-    
-    const data = await response.json();
-    
-    // Transformar la respuesta del backend al formato esperado por el frontend
-    if (data.status === "Usuario logueado") {
-      return {
-        data: {
-          token: "temp_token", // El backend no devuelve token, usar uno temporal
-          user: data.user
-        }
-      };
-    } else {
-      throw new Error(data.status || 'Error en el login');
+    try {
+      const response = await fetch(`${API_BASE_URL}/usuarios/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
+      
+      const data = await response.json();
+      
+      // Transformar la respuesta del backend al formato esperado por el frontend
+      if (data.status === "Usuario logueado") {
+        return {
+          data: {
+            token: "temp_token", // El backend no devuelve token, usar uno temporal
+            user: data.user
+          }
+        };
+      } else {
+        throw new Error(data.status || 'Error en el login');
+      }
+    } catch (error) {
+      return handleNetworkError(error);
     }
   },
 
