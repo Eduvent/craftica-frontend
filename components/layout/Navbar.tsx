@@ -63,7 +63,7 @@ export const Navbar = () => {
               className="flex items-center space-x-2 text-sm text-gray-600 hover:text-primary"
             >
               <User size={16} />
-              <span>{user.nombre}</span>
+              <span>{user.nombres}</span>
             </Link>
             <Button variant="outline" size="sm" onClick={handleLogout}>
               <LogOut size={16} className="mr-2" />
