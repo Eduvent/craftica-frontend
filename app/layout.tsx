@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Craftica - Plataforma de Artesanos',
   description: 'Conecta artesanos y pequeñas empresas con sus clientes',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

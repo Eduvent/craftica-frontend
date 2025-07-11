@@ -11,7 +11,7 @@ import {
   PaginatedResponse
 } from '@/types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://craftica-backend.hvf6fqedd3e3ezee.canadacentral.azurecontainer.io:3000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '/api/backend';
 
 // Configuración base para fetch
 const createFetchOptions = (options: RequestInit = {}): RequestInit => {
