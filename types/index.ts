@@ -41,6 +41,10 @@ export interface RegisterData {
 export interface Tienda {
   _id: number;
   nombre: string;
+  descripcion?: string;
+  logo?: string;
+  direccion?: string;
+  telefono?: string;
   calificacion?: number;
   imagen?: string;
   localidad?: {
