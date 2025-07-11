@@ -31,7 +31,7 @@ const ProductoDetailContent = () => {
   const { user } = useAuth();
   const { producto, loading, error, mutate } = useProducto(productoId);
   const { productos: productosRelacionados } = useProductos({
-    categoria: producto?.categoria,
+    categoria: producto?.categoria?.[0],
     limit: 4,
   });
 
@@ -107,7 +107,7 @@ const ProductoDetailContent = () => {
         <div className="space-y-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">{producto.nombre}</h2>
-            <Badge variant="secondary" className="mb-4">{producto.categoria}</Badge>
+            <Badge variant="secondary" className="mb-4">{producto.categoria?.[0] || 'Sin categoría'}</Badge>
             <p className="text-3xl font-bold text-primary mb-4">
               ${producto.precio.toLocaleString()}
             </p>
@@ -118,7 +118,7 @@ const ProductoDetailContent = () => {
 
           <div className="pt-6 space-y-4">
             <div className="text-sm text-gray-500">
-              <p><strong>Categoría:</strong> {producto.categoria}</p>
+              <p><strong>Categoría:</strong> {producto.categoria?.[0] || 'Sin categoría'}</p>
               <p><strong>Precio:</strong> ${producto.precio.toLocaleString()}</p>
               <p><strong>Fecha de creación:</strong> {new Date(producto.createdAt).toLocaleDateString()}</p>
             </div>
@@ -165,7 +165,7 @@ const ProductoDetailContent = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <Badge variant="secondary">{relatedProduct.categoria}</Badge>
+                    <Badge variant="secondary">{relatedProduct.categoria?.[0] || 'Sin categoría'}</Badge>
                     <span className="text-xl font-bold text-primary">
                       ${relatedProduct.precio.toLocaleString()}
                     </span>
