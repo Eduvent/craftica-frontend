@@ -45,6 +45,9 @@ export interface Tienda {
   logo?: string;
   direccion?: string;
   telefono?: string;
+  horario?: string;
+  ciudad?: string;
+  pais?: string;
   calificacion?: number;
   imagen?: string;
   localidad?: {
