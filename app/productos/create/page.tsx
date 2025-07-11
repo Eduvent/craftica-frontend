@@ -84,6 +84,7 @@ const CreateProductoContent = () => {
 
       const productoData = {
         ...data,
+        categoria: [data.categoria],
         imagen: data.imagen || undefined,
         tienda_id: Number(data.tienda_id),
       };
